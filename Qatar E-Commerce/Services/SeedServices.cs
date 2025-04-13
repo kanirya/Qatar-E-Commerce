@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Qatar_E_Commerce.Areas.Identity.Data;
 using Qatar_E_Commerce.Data;
 
 namespace Qatar_E_Commerce.Services
@@ -8,57 +9,54 @@ namespace Qatar_E_Commerce.Services
         public static async Task SeedDatabase(IServiceProvider serviceProvider)
         {
             using var scope = serviceProvider.CreateScope();
-            var context=scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            var roleManager=scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-            var logger=scope.ServiceProvider.GetRequiredService<ILogger<SeedServices>>();
+            var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<SeedServices>>();
 
             try
             {
                 logger.LogInformation("Ensuring database is created");
-               await context.Database.EnsureCreatedAsync();
-                logger.LogInformation("Seeding Role");
-                await AddRoleAsync(roleManager, "Admin");
-                await AddRoleAsync(roleManager, "User");
-                await AddRoleAsync(roleManager, "Product Manager");
-                await AddRoleAsync(roleManager, "Customer Support");
-                logger.LogInformation("Seeding admin User");
-                var adminEmail= "admin@gmail.com";
-                if(await userManager.FindByEmailAsync(adminEmail) == null)
+                await context.Database.EnsureCreatedAsync();
+
+                string[] roles = { "Admin", "User", "Product Manager", "Customer Support" };
+                foreach (var role in roles)
                 {
-                    var adminUser = new IdentityUser
+                    if (!await roleManager.RoleExistsAsync(role))
+                    {
+                        await roleManager.CreateAsync(new IdentityRole(role));
+                        logger.LogInformation($"Role '{role}' created.");
+                    }
+                }
+
+                string adminEmail = "admin@gmail.com";
+                string adminPassword = "Admin@123";
+
+                if (await userManager.FindByEmailAsync(adminEmail) == null)
+                {
+                    var adminUser = new ApplicationUser
                     {
                         UserName = adminEmail,
                         Email = adminEmail,
                         EmailConfirmed = true,
-                        NormalizedUserName = adminEmail.ToUpper(),
-                        NormalizedEmail = adminEmail.ToUpper(),
-                        SecurityStamp = Guid.NewGuid().ToString(),
                     };
-                    var result = await userManager.CreateAsync(adminUser, "Admin@123");
+
+                    var result = await userManager.CreateAsync(adminUser, adminPassword);
                     if (result.Succeeded)
                     {
                         await userManager.AddToRoleAsync(adminUser, "Admin");
-                        logger.LogInformation("Admin User Created");
+                        logger.LogInformation("Admin user created and assigned to 'Admin' role.");
+                    }
+                    else
+                    {
+                        logger.LogError("Failed to create admin user: " + string.Join(", ", result.Errors.Select(e => e.Description)));
                     }
                 }
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "An error occurred while seeding the database.");
-            }
-        }
-        private static async Task AddRoleAsync(RoleManager<IdentityRole> roleManager, string roleName)
-        {
-            if (!await roleManager.RoleExistsAsync(roleName))
-            {
-                var result = await roleManager.CreateAsync(new IdentityRole(roleName));
-                if(!result.Succeeded)
-                {
-                    throw new Exception($"Failed to create role {roleName}: {string.Join(", ", result.Errors.Select(e => e.Description))}");
-                }
-            
             }
         }
     }
