@@ -1,8 +1,1093 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="home-page">
+    &lt;!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content animate-on-scroll">
+                        <h1>Find the Right Parts for Your Vehicle</h1>
+                        <p>Qatar's largest selection of OEM and aftermarket auto parts with guaranteed fitment and fast delivery.</p>
+                        <div class="hero-search">
+                            <form class="vehicle-search-form">
+                                <div class="row g-2">
+                                    <div class="col-md-4">
+                                        <select class="form-select" required>
+                                            <option value="">Year</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2019">2019</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select class="form-select" required>
+                                            <option value="">Make</option>
+                                            <option value="toyota">Toyota</option>
+                                            <option value="nissan">Nissan</option>
+                                            <option value="honda">Honda</option>
+                                            <option value="bmw">BMW</option>
+                                            <option value="mercedes">Mercedes-Benz</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select class="form-select" required>
+                                            <option value="">Model</option>
+                                            <option value="camry">Camry</option>
+                                            <option value="corolla">Corolla</option>
+                                            <option value="rav4">RAV4</option>
+                                            <option value="land-cruiser">Land Cruiser</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <button type="submit" class="btn btn-primary w-100">Find Parts</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="hero-features">
+                            <div class="feature-item">
+                                <i class="fas fa-truck"></i>
+                                <span>Fast Delivery</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Genuine Parts</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-undo"></i>
+                                <span>Easy Returns</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-headset"></i>
+                                <span>Expert Support</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image animate-on-scroll">
+                        <img src="/placeholder.svg?height=400&width=500" alt="Auto Parts" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    &lt;!-- Popular Categories -->
+    <section class="popular-categories">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Categories</h2>
+                <p>Browse our most popular auto parts categories</p>
+            </div>
+            <div class="category-grid">
+                <a href="#" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-oil-can"></i>
+                    </div>
+                    <h3>Engine Parts</h3>
+                    <p>1,245 Products</p>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-car-battery"></i>
+                    </div>
+                    <h3>Electrical</h3>
+                    <p>876 Products</p>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Brakes</h3>
+                    <p>654 Products</p>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h3>Transmission</h3>
+                    <p>432 Products</p>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>Fluids & Filters</h3>
+                    <p>789 Products</p>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Body Parts</h3>
+                    <p>567 Products</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    &lt;!-- Featured Products -->
+    <section class="featured-products">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Products</h2>
+                <p>Top quality auto parts for your vehicle</p>
+            </div>
+
+            <div class="filter-bar">
+                <div class="filter-options">
+                    <div class="filter-group">
+                        <label>Sort By:</label>
+                        <select class="form-select form-select-sm">
+                            <option value="popularity">Popularity</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="newest">Newest First</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Brand:</label>
+                        <select class="form-select form-select-sm">
+                            <option value="">All Brands</option>
+                            <option value="bosch">Bosch</option>
+                            <option value="denso">Denso</option>
+                            <option value="brembo">Brembo</option>
+                            <option value="ngk">NGK</option>
+                            <option value="monroe">Monroe</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Price Range:</label>
+                        <select class="form-select form-select-sm">
+                            <option value="">All Prices</option>
+                            <option value="0-25">$0 - $25</option>
+                            <option value="25-50">$25 - $50</option>
+                            <option value="50-100">$50 - $100</option>
+                            <option value="100+">$100+</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="view-options">
+                    <button class="btn btn-sm btn-outline-secondary active"><i class="fas fa-th"></i></button>
+                    <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-list"></i></button>
+                </div>
+            </div>
+
+            <div class="product-grid">
+                &lt;!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-badge sale">Sale</div>
+                    <div class="product-thumb">
+                        <img src="/placeholder.svg?height=200&width=200" alt="Brake Pads">
+                        <div class="product-actions">
+                            <button class="btn-action quick-view-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                            <button class="btn-action" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="btn-action" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Brembo</div>
+                        <h3 class="product-title"><a href="#">Ceramic Brake Pads - Front</a></h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(24)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">$49.99</span>
+                            <span class="old-price">$69.99</span>
+                        </div>
+                        <div class="product-compatibility">Fits: Toyota Camry (2018-2022)</div>
+                        <button class="btn btn-primary btn-sm w-100 mt-2"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                    </div>
+                </div>
+
+                &lt;!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-badge new">New</div>
+                    <div class="product-thumb">
+                        <img src="/placeholder.svg?height=200&width=200" alt="Oil Filter">
+                        <div class="product-actions">
+                            <button class="btn-action quick-view-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                            <button class="btn-action" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="btn-action" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Bosch</div>
+                        <h3 class="product-title"><a href="#">Premium Oil Filter</a></h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(42)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">$12.99</span>
+                        </div>
+                        <div class="product-compatibility">Universal Fit</div>
+                        <button class="btn btn-primary btn-sm w-100 mt-2"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                    </div>
+                </div>
+
+                &lt;!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-thumb">
+                        <img src="/placeholder.svg?height=200&width=200" alt="Spark Plugs">
+                        <div class="product-actions">
+                            <button class="btn-action quick-view-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                            <button class="btn-action" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="btn-action" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">NGK</div>
+                        <h3 class="product-title"><a href="#">Iridium Spark Plugs (Set of 4)</a></h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(18)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">$24.99</span>
+                            <span class="old-price">$29.99</span>
+                        </div>
+                        <div class="product-compatibility">Multiple Vehicles</div>
+                        <button class="btn btn-primary btn-sm w-100 mt-2"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                    </div>
+                </div>
+
+                &lt;!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-badge bestseller">Bestseller</div>
+                    <div class="product-thumb">
+                        <img src="/placeholder.svg?height=200&width=200" alt="Air Filter">
+                        <div class="product-actions">
+                            <button class="btn-action quick-view-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                            <button class="btn-action" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="btn-action" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">K&N</div>
+                        <h3 class="product-title"><a href="#">High-Flow Air Filter</a></h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(36)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">$39.99</span>
+                        </div>
+                        <div class="product-compatibility">Fits: Nissan Patrol (2016-2022)</div>
+                        <button class="btn btn-primary btn-sm w-100 mt-2"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                    </div>
+                </div>
+
+                &lt;!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-thumb">
+                        <img src="/placeholder.svg?height=200&width=200" alt="Shock Absorber">
+                        <div class="product-actions">
+                            <button class="btn-action quick-view-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                            <button class="btn-action" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="btn-action" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Monroe</div>
+                        <h3 class="product-title"><a href="#">Premium Shock Absorber - Front</a></h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(14)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">$79.99</span>
+                            <span class="old-price">$99.99</span>
+                        </div>
+                        <div class="product-compatibility">Fits: Toyota Land Cruiser (2015-2022)</div>
+                        <button class="btn btn-primary btn-sm w-100 mt-2"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                    </div>
+                </div>
+
+                &lt;!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-thumb">
+                        <img src="/placeholder.svg?height=200&width=200" alt="Alternator">
+                        <div class="product-actions">
+                            <button class="btn-action quick-view-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                            <button class="btn-action" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="btn-action" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Denso</div>
+                        <h3 class="product-title"><a href="#">OEM Alternator</a></h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(29)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">$129.99</span>
+                        </div>
+                        <div class="product-compatibility">Fits: Honda Accord (2018-2022)</div>
+                        <button class="btn btn-primary btn-sm w-100 mt-2"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-outline-primary">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    &lt;!-- Special Offers -->
+    <section class="special-offers">
+        <div class="container">
+            <div class="section-header">
+                <h2>Special Offers</h2>
+                <p>Limited time deals on premium auto parts</p>
+            </div>
+            <div class="offers-grid">
+                <div class="offer-card">
+                    <div class="offer-content">
+                        <h3>Summer Sale</h3>
+                        <p>Up to 30% off on all brake components</p>
+                        <a href="#" class="btn btn-light">Shop Now</a>
+                    </div>
+                    <div class="offer-image">
+                        <img src="/placeholder.svg?height=150&width=150" alt="Brake Components">
+                    </div>
+                </div>
+                <div class="offer-card">
+                    <div class="offer-content">
+                        <h3>Bundle & Save</h3>
+                        <p>15% off when you buy oil and filter together</p>
+                        <a href="#" class="btn btn-light">Shop Now</a>
+                    </div>
+                    <div class="offer-image">
+                        <img src="/placeholder.svg?height=150&width=150" alt="Oil and Filter">
+                    </div>
+                </div>
+                <div class="offer-card">
+                    <div class="offer-content">
+                        <h3>New Arrivals</h3>
+                        <p>Check out our latest performance parts</p>
+                        <a href="#" class="btn btn-light">Shop Now</a>
+                    </div>
+                    <div class="offer-image">
+                        <img src="/placeholder.svg?height=150&width=150" alt="Performance Parts">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    &lt;!-- Brands Section -->
+    <section class="brands-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Brands</h2>
+                <p>We carry all major automotive brands</p>
+            </div>
+            <div class="brands-slider">
+                <div class="brand-item">
+                    <img src="/placeholder.svg?height=80&width=120" alt="Bosch">
+                </div>
+                <div class="brand-item">
+                    <img src="/placeholder.svg?height=80&width=120" alt="NGK">
+                </div>
+                <div class="brand-item">
+                    <img src="/placeholder.svg?height=80&width=120" alt="Denso">
+                </div>
+                <div class="brand-item">
+                    <img src="/placeholder.svg?height=80&width=120" alt="Brembo">
+                </div>
+                <div class="brand-item">
+                    <img src="/placeholder.svg?height=80&width=120" alt="Monroe">
+                </div>
+                <div class="brand-item">
+                    <img src="/placeholder.svg?height=80&width=120" alt="K&N">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    &lt;!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Customers Say</h2>
+                <p>Trusted by thousands of car owners in Qatar</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Fast delivery and perfect fit for my Toyota Camry. The quality of the brake pads is excellent and installation was easy. Will definitely order again!"</p>
+                    <div class="testimonial-author">
+                        <img src="/placeholder.svg?height=50&width=50" alt="Customer">
+                        <div>
+                            <h4>Ahmed Al-Mansour</h4>
+                            <span>Doha, Qatar</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="testimonial-text">"Great selection of parts for my Nissan Patrol. Customer service was very helpful in finding the right shock absorbers. Shipping was quick and everything arrived well-packaged."</p>
+                    <div class="testimonial-author">
+                        <img src="/placeholder.svg?height=50&width=50" alt="Customer">
+                        <div>
+                            <h4>Mohammed Al-Thani</h4>
+                            <span>Al Rayyan, Qatar</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"I've been buying parts from Qatar Auto Parts for years. Their prices are competitive and the quality is always top-notch. The new website makes finding the right parts even easier!"</p>
+                    <div class="testimonial-author">
+                        <img src="/placeholder.svg?height=50&width=50" alt="Customer">
+                        <div>
+                            <h4>Fatima Al-Sulaiti</h4>
+                            <span>Al Wakrah, Qatar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    &lt;!-- Why Choose Us -->
+    <section class="why-choose-us">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Qatar Auto Parts</h2>
+                <p>We're committed to providing the best auto parts shopping experience</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Guaranteed Fitment</h3>
+                    <p>Our advanced vehicle matching system ensures you get the right parts for your specific make and model.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Fast Delivery</h3>
+                    <p>Same-day shipping on orders placed before 2 PM with delivery throughout Qatar within 24-48 hours.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Quality Guarantee</h3>
+                    <p>We only sell genuine OEM and high-quality aftermarket parts from trusted manufacturers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Expert Support</h3>
+                    <p>Our team of automotive experts is available to help you find the right parts for your vehicle.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <h3>Easy Returns</h3>
+                    <p>30-day hassle-free return policy if you're not completely satisfied with your purchase.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Installation Services</h3>
+                    <p>Professional installation available at our garage for all purchased parts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
+
+<style>
+    /* Home Page Styles */
+    .home-page {
+        padding-bottom: 3rem;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        background: linear-gradient(135deg, var(--primary-lighter), var(--primary-light));
+        padding: 4rem 0;
+        margin-bottom: 3rem;
+        border-radius: var(--radius);
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--primary-dark);
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        color: var(--gray-dark);
+    }
+
+    .hero-search {
+        background-color: var(--white);
+        padding: 1.5rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: center;
+        background-color: var(--white);
+        padding: 0.5rem 1rem;
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-sm);
+    }
+
+        .feature-item i {
+            color: var(--primary-color);
+            margin-right: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .feature-item span {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+    .hero-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+    /* Section Styles */
+    .section-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+    }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+    /* Popular Categories */
+    .popular-categories {
+        margin-bottom: 3rem;
+    }
+
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .category-card {
+        background-color: var(--white);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+    }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+    .category-icon {
+        width: 60px;
+        height: 60px;
+        background-color: var(--primary-lighter);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+    }
+
+        .category-icon i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+    .category-card h3 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        color: var(--gray-dark);
+    }
+
+    .category-card p {
+        font-size: 0.8rem;
+        color: var(--primary-color);
+        font-weight: 500;
+    }
+
+    /* Featured Products */
+    .featured-products {
+        margin-bottom: 3rem;
+    }
+
+    .filter-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--white);
+        padding: 1rem;
+        border-radius: var(--radius);
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .filter-options {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .filter-group {
+        display: flex;
+        align-items: center;
+    }
+
+        .filter-group label {
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            color: var(--gray-dark);
+            font-weight: 500;
+        }
+
+    .view-options {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .product-card {
+        background-color: var(--white);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+    }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+    .product-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 0.25rem 0.75rem;
+        border-radius: var(--radius-sm);
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        z-index: 1;
+    }
+
+        .product-badge.sale {
+            background-color: #dc3545;
+            color: var(--white);
+        }
+
+        .product-badge.new {
+            background-color: #28a745;
+            color: var(--white);
+        }
+
+        .product-badge.bestseller {
+            background-color: var(--accent-color);
+            color: var(--white);
+        }
+
+    .product-thumb {
+        position: relative;
+        padding: 1rem;
+        background-color: var(--light-color);
+        border-radius: var(--radius) var(--radius) 0 0;
+        text-align: center;
+    }
+
+        .product-thumb img {
+            max-width: 100%;
+            height: auto;
+            transition: var(--transition);
+        }
+
+    .product-actions {
+        position: absolute;
+        bottom: -40px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        background-color: rgba(255, 255, 255, 0.9);
+        transition: var(--transition);
+        opacity: 0;
+    }
+
+    .product-card:hover .product-actions {
+        bottom: 0;
+        opacity: 1;
+    }
+
+    .btn-action {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: var(--white);
+        border: none;
+        color: var(--gray-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition);
+        box-shadow: var(--shadow-sm);
+    }
+
+        .btn-action:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+    .product-info {
+        padding: 1rem;
+    }
+
+    .product-brand {
+        font-size: 0.75rem;
+        color: var(--gray);
+        margin-bottom: 0.25rem;
+    }
+
+    .product-title {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+
+        .product-title a {
+            color: var(--gray-dark);
+            transition: var(--transition);
+        }
+
+            .product-title a:hover {
+                color: var(--primary-color);
+            }
+
+    .product-rating {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        font-size: 0.8rem;
+        color: var(--accent-color);
+    }
+
+        .product-rating span {
+            margin-left: 0.5rem;
+            color: var(--gray);
+        }
+
+    .product-price {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .current-price {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+    .old-price {
+        font-size: 0.85rem;
+        color: var(--gray);
+        text-decoration: line-through;
+        margin-left: 0.5rem;
+    }
+
+    .product-compatibility {
+        font-size: 0.75rem;
+        color: var(--gray);
+        margin-bottom: 0.5rem;
+    }
+
+    /* Special Offers */
+    .special-offers {
+        margin-bottom: 3rem;
+    }
+
+    .offers-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .offer-card {
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+    }
+
+        .offer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+    .offer-content {
+        flex: 1;
+    }
+
+        .offer-content h3 {
+            font-size: 1.25rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .offer-content p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+        }
+
+    .offer-image {
+        width: 100px;
+        height: 100px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 1rem;
+    }
+
+        .offer-image img {
+            max-width: 80%;
+            max-height: 80%;
+        }
+
+    /* Brands Section */
+    .brands-section {
+        margin-bottom: 3rem;
+    }
+
+    .brands-slider {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .brand-item {
+        background-color: var(--white);
+        padding: 1rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+    }
+
+        .brand-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .brand-item img {
+            max-width: 100%;
+            max-height: 60px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .brand-item:hover img {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+
+    /* Testimonials */
+    .testimonials {
+        margin-bottom: 3rem;
+    }
+
+    .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .testimonial-card {
+        background-color: var(--white);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+    }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+    .testimonial-rating {
+        color: var(--accent-color);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .testimonial-text {
+        font-size: 0.9rem;
+        color: var(--gray-dark);
+        margin-bottom: 1.5rem;
+        font-style: italic;
+    }
+
+    .testimonial-author {
+        display: flex;
+        align-items: center;
+    }
+
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+
+        .testimonial-author h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-author span {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+    /* Why Choose Us */
+    .why-choose-us {
+        margin-bottom: 3rem;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .feature-card {
+        background-color: var(--white);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+    }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        backgroun ```csharp file="Views/Home/Index.cshtml" isFixed @{
+        ViewData["Title"] = "Home";
+    }
+   </style>

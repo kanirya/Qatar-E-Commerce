@@ -1,55 +1,80 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
-    Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
+	ViewData["Title"] = "Register";
+	Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
 }
 
-<h1>@ViewData["Title"]</h1>
 
-<div class="row">
-    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-        <h2>Create a new account.</h2>
-        <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-        <div class="form-floating mb-3">
-            <input asp-for="Input.Name" class="form-control" autocomplete="name" aria-required="true" placeholder="name" />
-            <label asp-for="Input.Name">Name</label>
-            <span asp-validation-for="Input.Name" class="text-danger"></span>
-        </div>
-        <div class="form-floating mb-3">
-            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-            <label asp-for="Input.Email">Email</label>
-            <span asp-validation-for="Input.Email" class="text-danger"></span>
-        </div>
-        <div class="form-floating mb-3">
-            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-            <label asp-for="Input.Password">Password</label>
-            <span asp-validation-for="Input.Password" class="text-danger"></span>
-        </div>
-        <div class="form-floating mb-3">
-            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-            <label asp-for="Input.ConfirmPassword">Confirm Password</label>
-            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-        </div>
-        @if (User.IsInRole("Admin"))
-        {
-            <div class="form-group">
-                <label asp-for="SelectedRole"></label>
-                <select asp-for="SelectedRole" asp-items="Model.Roles" class="form-control">
-                    <option value="">-- Select Role --</option>
-                </select>
-            </div>
-        }
-      
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-        </form>
-    <p>
-        <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Already has an Account</a>
-    </p>
-   
+<div class="auth-wrapper">
+	<div class="auth-container">
+		<div class="auth-card">
+			<div class="auth-content">
+				<div class="brand-logo">
+					<div class="logo-circle">
+						<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+							<path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+							<path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+							<path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+						</svg>
+					</div>
+				</div>
+
+				<div class="auth-title">
+					<h1>Welcome</h1>
+					<p>Please Register in to continue</p>
+				</div>
+				<form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+					<div class="form-floating mb-3">
+						<input asp-for="Input.Name" class="form-input" autocomplete="name" aria-required="true" placeholder="name" />
+						<span asp-validation-for="Input.Name" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+									<polyline points="22,6 12,13 2,6"></polyline>
+								</svg>
+							</div>
+							<input asp-for="Input.Email" class="form-input" autocomplete="username" aria-required="true" placeholder="Email address" />
+						</div>
+						<span asp-validation-for="Input.Email" class="validation-error"></span>
+					</div>
+
+					<div class="form-floating mb-3">
+						<input asp-for="Input.Password" class="form-input" autocomplete="new-password" aria-required="true" placeholder="password" />
+						<span asp-validation-for="Input.Password" class="text-danger"></span>
+					</div>
+					<div class="form-floating mb-3">
+						<input asp-for="Input.ConfirmPassword" class="form-input" autocomplete="new-password" aria-required="true" placeholder="password" />
+						<span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+					</div>
+					@if (User.IsInRole("Admin"))
+					{
+						<div class="form-group">
+							<select asp-for="SelectedRole" asp-items="Model.Roles" class="form-input">
+								<option class="mediumText" style="" value="">-- Select Role --</option>
+							</select>
+						</div>
+					}
+
+
+					<button id="registerSubmit" type="submit" class="w-100 btn btn-lg mt-2 btn-submit">Register</button>
+
+					<div class="form-footer">
+						<p>Don't have an account? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="register-link">Already has an account</a></p>
+					</div>
+				</form>
+			</div>
+
+
+		</div>
+	</div>
 </div>
 
+
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+	<partial name="_ValidationScriptsPartial" />
 }

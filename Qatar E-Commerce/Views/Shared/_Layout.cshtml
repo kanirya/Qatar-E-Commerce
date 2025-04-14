@@ -1,58 +1,966 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Qatar_E_Commerce</title>
+    <title>@ViewData["Title"] - Qatar Auto Parts</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="~/Qatar_E_Commerce.styles.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Qatar_Auto_Parts.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Qatar_E_Commerce</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li> 
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Admin">Admin</a>
-                            </li>
-                        }
-                     
-                    </ul>
-                    <partial name="_LoginPartial.cshtml" />
-                </div>
+    <!-- Promotional Banner -->
+    <div class="promo-banner" id="promoBanner">
+        <div class="container">
+            <div class="promo-content">
+                <span>🔧 Special Offer: 15% off all brake parts! Use code: <strong>QATARBRAKE</strong></span>
+                <a href="#" class="promo-link">Shop Now</a>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+            <button class="promo-close" id="promoClose"><i class="fas fa-times"></i></button>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Qatar_E_Commerce - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-cogs"></i>
+                    <span>Qatar Auto Parts</span>
+                </div>
+                <button class="sidebar-close" id="sidebarClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="sidebar-user">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="user-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="user-info">
+                        <h6>Welcome</h6>
+                        <p>@User.Identity.Name</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="user-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="user-info">
+                        <h6>Welcome, Guest</h6>
+                        <div class="user-actions">
+                            <a asp-area="Identity" asp-page="/Account/Login">Sign In</a>
+                            <span class="divider">|</span>
+                            <a asp-area="Identity" asp-page="/Account/Register">Register</a>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h6 class="nav-title">Main Menu</h6>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link active">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-tags"></i>
+                                <span>Special Offers</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-star"></i>
+                                <span>New Arrivals</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-wrench"></i>
+                                <span>Garage Services</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>About Us</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-phone-alt"></i>
+                                <span>Contact Us</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h6 class="nav-title">Shop By Category</h6>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-car-battery"></i>
+                                <span>Electrical</span>
+                                <i class="fas fa-chevron-down dropdown-icon"></i>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Batteries</a></li>
+                                <li><a href="#">Alternators</a></li>
+                                <li><a href="#">Starters</a></li>
+                                <li><a href="#">Lighting</a></li>
+                                <li><a href="#">Sensors</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-oil-can"></i>
+                                <span>Engine Parts</span>
+                                <i class="fas fa-chevron-down dropdown-icon"></i>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Pistons & Rings</a></li>
+                                <li><a href="#">Camshafts</a></li>
+                                <li><a href="#">Timing Belts</a></li>
+                                <li><a href="#">Gaskets</a></li>
+                                <li><a href="#">Oil Pumps</a></li>
+                                <li><a href="#">Spark Plugs</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Brakes & Suspension</span>
+                                <i class="fas fa-chevron-down dropdown-icon"></i>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Brake Pads</a></li>
+                                <li><a href="#">Brake Discs</a></li>
+                                <li><a href="#">Calipers</a></li>
+                                <li><a href="#">Shock Absorbers</a></li>
+                                <li><a href="#">Struts</a></li>
+                                <li><a href="#">Coil Springs</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-cog"></i>
+                                <span>Transmission</span>
+                                <i class="fas fa-chevron-down dropdown-icon"></i>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Clutch Kits</a></li>
+                                <li><a href="#">Gearbox Parts</a></li>
+                                <li><a href="#">Differentials</a></li>
+                                <li><a href="#">CV Joints</a></li>
+                                <li><a href="#">Driveshafts</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-tint"></i>
+                                <span>Fluids & Filters</span>
+                                <i class="fas fa-chevron-down dropdown-icon"></i>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Engine Oil</a></li>
+                                <li><a href="#">Transmission Fluid</a></li>
+                                <li><a href="#">Brake Fluid</a></li>
+                                <li><a href="#">Coolant</a></li>
+                                <li><a href="#">Oil Filters</a></li>
+                                <li><a href="#">Air Filters</a></li>
+                                <li><a href="#">Fuel Filters</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-car"></i>
+                                <span>Body & Exterior</span>
+                                <i class="fas fa-chevron-down dropdown-icon"></i>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Bumpers</a></li>
+                                <li><a href="#">Mirrors</a></li>
+                                <li><a href="#">Lights</a></li>
+                                <li><a href="#">Grilles</a></li>
+                                <li><a href="#">Fenders</a></li>
+                                <li><a href="#">Doors</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-chair"></i>
+                                <span>Interior</span>
+                                <i class="fas fa-chevron-down dropdown-icon"></i>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Seats & Covers</a></li>
+                                <li><a href="#">Dashboard Parts</a></li>
+                                <li><a href="#">Steering Wheels</a></li>
+                                <li><a href="#">Floor Mats</a></li>
+                                <li><a href="#">Air Fresheners</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-tools"></i>
+                                <span>Tools & Equipment</span>
+                                <i class="fas fa-chevron-down dropdown-icon"></i>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Hand Tools</a></li>
+                                <li><a href="#">Power Tools</a></li>
+                                <li><a href="#">Diagnostic Tools</a></li>
+                                <li><a href="#">Jacks & Stands</a></li>
+                                <li><a href="#">Workshop Equipment</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h6 class="nav-title">Popular Brands</h6>
+                    <div class="brand-grid">
+                        <a href="#" class="brand-item">
+                            <img src="/placeholder.svg?height=40&width=40" alt="Bosch">
+                            <span>Bosch</span>
+                        </a>
+                        <a href="#" class="brand-item">
+                            <img src="/placeholder.svg?height=40&width=40" alt="NGK">
+                            <span>NGK</span>
+                        </a>
+                        <a href="#" class="brand-item">
+                            <img src="/placeholder.svg?height=40&width=40" alt="Denso">
+                            <span>Denso</span>
+                        </a>
+                        <a href="#" class="brand-item">
+                            <img src="/placeholder.svg?height=40&width=40" alt="Brembo">
+                            <span>Brembo</span>
+                        </a>
+                        <a href="#" class="brand-item">
+                            <img src="/placeholder.svg?height=40&width=40" alt="Castrol">
+                            <span>Castrol</span>
+                        </a>
+                        <a href="#" class="brand-item">
+                            <img src="/placeholder.svg?height=40&width=40" alt="Monroe">
+                            <span>Monroe</span>
+                        </a>
+                    </div>
+                </div>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <div class="nav-section">
+                        <h6 class="nav-title">Admin Panel</h6>
+                        <ul class="nav-list">
+                            <li class="nav-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Admin" class="nav-link">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fas fa-box"></i>
+                                    <span>Inventory</span>
+                                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="#">All Parts</a></li>
+                                    <li><a href="#">Add New Part</a></li>
+                                    <li><a href="#">Categories</a></li>
+                                    <li><a href="#">Stock Levels</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fas fa-users"></i>
+                                    <span>Customers</span>
+                                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="#">All Customers</a></li>
+                                    <li><a href="#">Add New</a></li>
+                                    <li><a href="#">Accounts</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <span>Reports</span>
+                                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="#">Sales</a></li>
+                                    <li><a href="#">Inventory</a></li>
+                                    <li><a href="#">Popular Parts</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Settings</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                }
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="theme-toggle">
+                    <span>Dark Mode</span>
+                    <label class="switch">
+                        <input type="checkbox" id="themeToggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="sidebar-contact">
+                    <p>Need help finding parts?</p>
+                    <a href="tel:+97412345678" class="contact-btn">
+                        <i class="fas fa-phone-alt"></i> Call Our Experts
+                    </a>
+                </div>
+                <div class="sidebar-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="brand">
+                        <a href="/" class="brand-logo">
+                            <i class="fas fa-cogs"></i>
+                            <span>Qatar Auto Parts</span>
+                        </a>
+                    </div>
+                    <div class="vehicle-selector">
+                        <button class="vehicle-selector-btn">
+                            <i class="fas fa-car"></i>
+                            <span>Select Your Vehicle</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="vehicle-dropdown">
+                            <h6>Find parts for your vehicle</h6>
+                            <form class="vehicle-form">
+                                <div class="row g-2">
+                                    <div class="col-md-4">
+                                        <select class="form-select" required>
+                                            <option value="">Year</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2019">2019</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select class="form-select" required>
+                                            <option value="">Make</option>
+                                            <option value="toyota">Toyota</option>
+                                            <option value="nissan">Nissan</option>
+                                            <option value="honda">Honda</option>
+                                            <option value="bmw">BMW</option>
+                                            <option value="mercedes">Mercedes-Benz</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select class="form-select" required>
+                                            <option value="">Model</option>
+                                            <option value="camry">Camry</option>
+                                            <option value="corolla">Corolla</option>
+                                            <option value="rav4">RAV4</option>
+                                            <option value="land-cruiser">Land Cruiser</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row g-2 mt-2">
+                                    <div class="col-md-6">
+                                        <select class="form-select">
+                                            <option value="">Engine</option>
+                                            <option value="2.0l">2.0L</option>
+                                            <option value="2.5l">2.5L</option>
+                                            <option value="3.0l">3.0L</option>
+                                            <option value="3.5l">3.5L</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-select">
+                                            <option value="">Transmission</option>
+                                            <option value="automatic">Automatic</option>
+                                            <option value="manual">Manual</option>
+                                            <option value="cvt">CVT</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <button type="submit" class="btn btn-primary w-100">Find Parts</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="header-center">
+                    <div class="search-container">
+                        <form class="search-form">
+                            <div class="search-category">
+                                <select class="form-select">
+                                    <option value="all">All Categories</option>
+                                    <option value="engine">Engine Parts</option>
+                                    <option value="brakes">Brakes</option>
+                                    <option value="electrical">Electrical</option>
+                                    <option value="suspension">Suspension</option>
+                                    <option value="transmission">Transmission</option>
+                                </select>
+                            </div>
+                            <input type="text" placeholder="Search by part name, brand, or part number..." class="search-input">
+                            <button type="submit" class="search-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <div class="header-contact">
+                        <i class="fas fa-phone-alt"></i>
+                        <div class="contact-info">
+                            <span>Customer Support</span>
+                            <a href="tel:+97412345678">+974 1234 5678</a>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <div class="action-item">
+                            <a href="#" class="action-link" data-bs-toggle="tooltip" title="Part Finder" id="partFinderBtn">
+                                <i class="fas fa-search-plus"></i>
+                            </a>
+                        </div>
+                        <div class="action-item">
+                            <a href="#" class="action-link" data-bs-toggle="tooltip" title="Compare Parts">
+                                <i class="fas fa-exchange-alt"></i>
+                                <span class="badge">2</span>
+                            </a>
+                        </div>
+                        <div class="action-item">
+                            <a href="#" class="action-link" data-bs-toggle="tooltip" title="Wishlist">
+                                <i class="fas fa-heart"></i>
+                                <span class="badge">5</span>
+                            </a>
+                        </div>
+                        <div class="action-item cart-dropdown">
+                            <a href="#" class="action-link" data-bs-toggle="tooltip" title="Cart">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="badge">2</span>
+                            </a>
+                            <div class="cart-menu">
+                                <div class="cart-header">
+                                    <h6>Shopping Cart (2)</h6>
+                                </div>
+                                <div class="cart-items">
+                                    <div class="cart-item">
+                                        <div class="cart-item-image">
+                                            <img src="/placeholder.svg?height=50&width=50" alt="Brake Pads">
+                                        </div>
+                                        <div class="cart-item-info">
+                                            <h6>Brembo Brake Pads</h6>
+                                            <p>1 × $49.99</p>
+                                            <span class="part-compatibility">Fits: Toyota Camry (2018-2022)</span>
+                                        </div>
+                                        <button class="cart-item-remove"><i class="fas fa-times"></i></button>
+                                    </div>
+                                    <div class="cart-item">
+                                        <div class="cart-item-image">
+                                            <img src="/placeholder.svg?height=50&width=50" alt="Oil Filter">
+                                        </div>
+                                        <div class="cart-item-info">
+                                            <h6>Bosch Oil Filter</h6>
+                                            <p>2 × $12.99</p>
+                                            <span class="part-compatibility">Universal Fit</span>
+                                        </div>
+                                        <button class="cart-item-remove"><i class="fas fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="cart-footer">
+                                    <div class="cart-total">
+                                        <span>Total:</span>
+                                        <span>$75.97</span>
+                                    </div>
+                                    <div class="cart-buttons">
+                                        <a href="#" class="btn btn-outline-primary btn-sm">View Cart</a>
+                                        <a href="#" class="btn btn-primary btn-sm">Checkout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-item user-dropdown">
+                            <a href="#" class="action-link user-toggle" data-bs-toggle="tooltip" title="Account">
+                                <i class="fas fa-user-circle"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <div class="dropdown-user-info">
+                                        <div class="dropdown-user-avatar">
+                                            <i class="fas fa-user-circle"></i>
+                                        </div>
+                                        <div class="dropdown-user-details">
+                                            <h6>@User.Identity.Name</h6>
+                                            <p>Customer</p>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-user"></i> My Profile</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-car"></i> My Vehicles</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-shopping-bag"></i> My Orders</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-heart"></i> Wishlist</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Account Settings</a>
+                                    <div class="dropdown-divider"></div>
+                                    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                        <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login"><i class="fas fa-sign-in-alt"></i> Login</a>
+                                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register"><i class="fas fa-user-plus"></i> Register</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                @RenderBody()
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-newsletter">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <div class="newsletter-content">
+                                    <h4>Join our newsletter</h4>
+                                    <p>Get exclusive deals, new arrivals, and maintenance tips directly to your inbox.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <form class="newsletter-form">
+                                    <div class="input-group">
+                                        <input type="email" class="form-control" placeholder="Your Email Address">
+                                        <button class="btn btn-primary" type="submit">Subscribe</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-main">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="footer-widget">
+                                    <div class="footer-logo">
+                                        <i class="fas fa-cogs"></i>
+                                        <span>Qatar Auto Parts</span>
+                                    </div>
+                                    <p>Your trusted source for quality auto parts in Qatar. We offer OEM and aftermarket parts for all major vehicle makes and models with fast delivery and expert advice.</p>
+                                    <div class="contact-info">
+                                        <div class="contact-item">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <p>123 Automotive Street, Doha, Qatar</p>
+                                        </div>
+                                        <div class="contact-item">
+                                            <i class="fas fa-phone-alt"></i>
+                                            <p>+974 1234 5678</p>
+                                        </div>
+                                        <div class="contact-item">
+                                            <i class="fas fa-envelope"></i>
+                                            <p>parts@qatarautoparts.com</p>
+                                        </div>
+                                    </div>
+                                    <div class="social-links">
+                                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="#"><i class="fab fa-twitter"></i></a>
+                                        <a href="#"><i class="fab fa-instagram"></i></a>
+                                        <a href="#"><i class="fab fa-youtube"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-6">
+                                <div class="footer-widget">
+                                    <h5>Popular Categories</h5>
+                                    <ul class="footer-links">
+                                        <li><a href="#">Engine Parts</a></li>
+                                        <li><a href="#">Brake Systems</a></li>
+                                        <li><a href="#">Suspension</a></li>
+                                        <li><a href="#">Electrical</a></li>
+                                        <li><a href="#">Filters</a></li>
+                                        <li><a href="#">Body Parts</a></li>
+                                        <li><a href="#">Tools</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-6">
+                                <div class="footer-widget">
+                                    <h5>Customer Service</h5>
+                                    <ul class="footer-links">
+                                        <li><a href="#">Contact Us</a></li>
+                                        <li><a href="#">Track Order</a></li>
+                                        <li><a href="#">Returns & Warranty</a></li>
+                                        <li><a href="#">Shipping Policy</a></li>
+                                        <li><a href="#">Part Finder</a></li>
+                                        <li><a href="#">FAQs</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-6">
+                                <div class="footer-widget">
+                                    <h5>Quick Links</h5>
+                                    <ul class="footer-links">
+                                        <li><a href="#">About Us</a></li>
+                                        <li><a href="#">Our Garage Services</a></li>
+                                        <li><a href="#">Brands We Carry</a></li>
+                                        <li><a href="#">Careers</a></li>
+                                        <li><a href="#">Blog & Tips</a></li>
+                                        <li><a href="#">Sitemap</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="footer-widget">
+                                    <h5>Our Garage</h5>
+                                    <p>Visit our garage for professional installation and maintenance services.</p>
+                                    <div class="garage-hours">
+                                        <h6>Working Hours</h6>
+                                        <ul class="hours-list">
+                                            <li><span>Monday - Friday:</span> 8:00 AM - 6:00 PM</li>
+                                            <li><span>Saturday:</span> 8:00 AM - 4:00 PM</li>
+                                            <li><span>Sunday:</span> Closed</li>
+                                        </ul>
+                                    </div>
+                                    <a href="#" class="btn btn-outline-primary btn-sm mt-3">Book a Service</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="copyright">
+                                    &copy; @DateTime.Now.Year Qatar Auto Parts. All Rights Reserved.
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="footer-bottom-links">
+                                    <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
+                                    <a href="#">Terms of Service</a>
+                                    <a href="#">Cookie Policy</a>
+                                    <a href="#">Accessibility</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
-    </footer>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div class="modal fade" id="quickViewModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Quick View</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="quick-view-gallery">
+                                <img src="/placeholder.svg?height=300&width=300" alt="Brake Pads" class="img-fluid">
+                                <div class="quick-view-thumbs">
+                                    <div class="thumb active"><img src="/placeholder.svg?height=60&width=60" alt="Thumbnail"></div>
+                                    <div class="thumb"><img src="/placeholder.svg?height=60&width=60" alt="Thumbnail"></div>
+                                    <div class="thumb"><img src="/placeholder.svg?height=60&width=60" alt="Thumbnail"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="quick-view-details">
+                                <h4 class="product-title">Brembo Brake Pads</h4>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>(24 reviews)</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="current-price">$49.99</span>
+                                    <span class="old-price">$69.99</span>
+                                    <span class="discount">-28%</span>
+                                </div>
+                                <div class="part-compatibility">
+                                    <h6>Fits:</h6>
+                                    <ul>
+                                        <li>Toyota Camry (2018-2022)</li>
+                                        <li>Toyota Avalon (2019-2022)</li>
+                                        <li>Lexus ES (2019-2022)</li>
+                                    </ul>
+                                </div>
+                                <div class="product-description">
+                                    <p>High-performance ceramic brake pads designed for improved stopping power and reduced brake dust. Features anti-noise shims and wear indicators.</p>
+                                </div>
+                                <div class="product-specs">
+                                    <div class="spec-item">
+                                        <span>Brand:</span>
+                                        <span>Brembo</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span>Part Number:</span>
+                                        <span>BP-4872</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span>Position:</span>
+                                        <span>Front</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span>Material:</span>
+                                        <span>Ceramic</span>
+                                    </div>
+                                </div>
+                                <div class="product-quantity">
+                                    <label>Quantity:</label>
+                                    <div class="quantity-selector">
+                                        <button class="qty-btn minus"><i class="fas fa-minus"></i></button>
+                                        <input type="number" value="1" min="1" class="qty-input">
+                                        <button class="qty-btn plus"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                                    <button class="btn btn-outline-secondary"><i class="fas fa-heart"></i></button>
+                                    <button class="btn btn-outline-secondary"><i class="fas fa-exchange-alt"></i></button>
+                                </div>
+                                <div class="product-meta">
+                                    <div class="meta-item">
+                                        <span>Availability:</span>
+                                        <span class="in-stock">In Stock (12)</span>
+                                    </div>
+                                    <div class="meta-item">
+                                        <span>Category:</span>
+                                        <a href="#">Brakes</a>
+                                    </div>
+                                    <div class="meta-item">
+                                        <span>Tags:</span>
+                                        <a href="#">Brake Pads</a>,
+                                        <a href="#">Ceramic</a>,
+                                        <a href="#">Front</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Part Finder Modal -->
+    <div class="modal fade" id="partFinderModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Advanced Part Finder</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="part-finder-tabs">
+                        <ul class="nav nav-tabs" id="partFinderTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="vehicle-tab" data-bs-toggle="tab" data-bs-target="#vehicle" type="button" role="tab" aria-controls="vehicle" aria-selected="true">By Vehicle</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="part-number-tab" data-bs-toggle="tab" data-bs-target="#part-number" type="button" role="tab" aria-controls="part-number" aria-selected="false">By Part Number</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="vin-tab" data-bs-toggle="tab" data-bs-target="#vin" type="button" role="tab" aria-controls="vin" aria-selected="false">By VIN</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="partFinderTabContent">
+                            <div class="tab-pane fade show active" id="vehicle" role="tabpanel" aria-labelledby="vehicle-tab">
+                                <form class="part-finder-form">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Year</label>
+                                            <select class="form-select" required>
+                                                <option value="">Select Year</option>
+                                                <option value="2023">2023</option>
+                                                <option value="2022">2022</option>
+                                                <option value="2021">2021</option>
+                                                <option value="2020">2020</option>
+                                                <option value="2019">2019</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Make</label>
+                                            <select class="form-select" required>
+                                                <option value="">Select Make</option>
+                                                <option value="toyota">Toyota</option>
+                                                <option value="nissan">Nissan</option>
+                                                <option value="honda">Honda</option>
+                                                <option value="bmw">BMW</option>
+                                                <option value="mercedes">Mercedes-Benz</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Model</label>
+                                            <select class="form-select" required>
+                                                <option value="">Select Model</option>
+                                                <option value="camry">Camry</option>
+                                                <option value="corolla">Corolla</option>
+                                                <option value="rav4">RAV4</option>
+                                                <option value="land-cruiser">Land Cruiser</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Engine</label>
+                                            <select class="form-select">
+                                                <option value="">Select Engine</option>
+                                                <option value="2.0l">2.0L</option>
+                                                <option value="2.5l">2.5L</option>
+                                                <option value="3.0l">3.0L</option>
+                                                <option value="3.5l">3.5L</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Transmission</label>
+                                            <select class="form-select">
+                                                <option value="">Select Transmission</option>
+                                                <option value="automatic">Automatic</option>
+                                                <option value="manual">Manual</option>
+                                                <option value="cvt">CVT</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Category</label>
+                                            <select class="form-select">
+                                                <option value="">All Categories</option>
+                                                <option value="brakes">Brakes</option>
+                                                <option value="engine">Engine</option>
+                                                <option value="electrical">Electrical</option>
+                                                <option value="suspension">Suspension</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary">Find Parts</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="part-number" role="tabpanel" aria-labelledby="part-number-tab">
+                                <form class="part-finder-form">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Part Number</label>
+                                            <input type="text" class="form-control" placeholder="Enter part number" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Brand (Optional)</label>
+                                            <select class="form-select">
+                                                <option value="">Any Brand</option>
+                                                <option value="bosch">Bosch</option>
+                                                <option value="denso">Denso</option>
+                                                <option value="brembo">Brembo</option>
+                                                <option value="ngk">NGK</option>
+                                                <option value="monroe">Monroe</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="vin" role="tabpanel" aria-labelledby="vin-tab">
+                                <form class="part-finder-form">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label class="form-label">Vehicle Identification Number (VIN)</label>
+                                            <input type="text" class="form-control" placeholder="Enter 17-digit VIN" required maxlength="17" minlength="17">
+                                            <div class="form-text">Find your VIN on your vehicle registration or on the driver's side dashboard.</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Category (Optional)</label>
+                                            <select class="form-select">
+                                                <option value="">All Categories</option>
+                                                <option value="brakes">Brakes</option>
+                                                <option value="engine">Engine</option>
+                                                <option value="electrical">Electrical</option>
+                                                <option value="suspension">Suspension</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary">Find Parts</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Cart -->
+    <div class="floating-cart" id="floatingCart">
+        <button class="floating-cart-button">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="floating-cart-count">2</span>
+        </button>
+        <div class="floating-cart-total">$75.97</div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
