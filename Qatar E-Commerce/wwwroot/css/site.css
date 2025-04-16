@@ -2033,3 +2033,10 @@ body.dark-mode {
         padding: 0 0.75rem;
     }
 }
+
+.Auth-div{
+    background:var(--primary-light);
+    border-radius:5px;
+    height:40px;
+    width:120px;
+}

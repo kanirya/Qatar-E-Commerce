@@ -317,6 +317,11 @@
                                     <span>Settings</span>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                    <a id="logout" type="submit" class="nav-link "><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+                                </form>
+                            </li>
                         </ul>
                     </div>
                 }
@@ -353,12 +358,7 @@
                     <button class="menu-toggle" id="menuToggle">
                         <i class="fas fa-bars"></i>
                     </button>
-                    <div class="brand">
-                        <a href="/" class="brand-logo">
-                            <i class="fas fa-cogs"></i>
-                            <span>Qatar Auto Parts</span>
-                        </a>
-                    </div>
+                    
                     <div class="vehicle-selector">
                         <button class="vehicle-selector-btn">
                             <i class="fas fa-car"></i>
@@ -455,6 +455,10 @@
                             <a href="tel:+97412345678">+974 1234 5678</a>
                         </div>
                     </div>
+                    <div class="Auth-div">
+                        <partial name="_LoginPartial.cshtml" />
+                    </div>
+                   
                     <div class="header-actions">
                         <div class="action-item">
                             <a href="#" class="action-link" data-bs-toggle="tooltip" title="Part Finder" id="partFinderBtn">
